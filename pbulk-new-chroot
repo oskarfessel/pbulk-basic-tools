@@ -11,7 +11,7 @@
 #   History:
 #   Date        Name        Modification
 #   2017-12-24  root        Begin
-#   2023-04-23  Jan-Hinrich be less verbose and hndle errors better
+#   2023-04-23  Jan-Hinrich be less verbose
 ##########################################################################
 
 usage()
