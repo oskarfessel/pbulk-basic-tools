@@ -1,7 +1,9 @@
+#!/bin/sh
+
 cd /
 
-# better way to create tar file 
-# find . -depth | egrep -v '\./proc|\./dev|\./kern|./usr/pkg|\./usr/src|\./usr/xsrc|\./usr/pkgsrc|\./home|\./var/db/pkgin|\./.tar' | cpio -ov | gzip -9 > .tar/os-version.tgz
+# better way to create tar file on live systems
+find . -depth | egrep -v '\./proc|\./dev|\./kern|./usr/pkg|\./usr/src|\./usr/xsrc|\./usr/pkgsrc|\./home|\./var/db/pkgin|\./.tar' | cpio -o | gzip -9 > .tar/os-version.tgz
 
 [ -d /home/bacon.old ] || mv /home/bacon /home/bacon.old 
 
