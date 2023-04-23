@@ -11,6 +11,7 @@
 #   History:
 #   Date        Name        Modification
 #   2017-12-24  root        Begin
+#   2023-04-23  Jan-Hinrich be less verbose and hndle errors better
 ##########################################################################
 
 usage()
@@ -40,7 +41,7 @@ fi
 umask 022   # Everything must be accessible to pbulk user/group
 mkdir $dir
 cd $dir
-tar zxvf ../$tarball
+tar zxf ../$tarball
 chmod 1777 tmp var/tmp
 cd ..
 
