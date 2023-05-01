@@ -171,6 +171,8 @@ if [ ! -e $pkgsrc ]; then
 	    fetch $url
 	elif which wget; then
 	    wget $url
+	elif which ftp; then
+	    ftp $url
 	else
 	    printf "No curl, fetch, or wget found.  :-(\n"
 	    exit 1
@@ -179,7 +181,11 @@ if [ ! -e $pkgsrc ]; then
 	umask 022           # Make sure source tree is world readable
 	mkdir -p $parent
 	cd $parent
-	tar zxvf $start_dir/pkgsrc.tar.gz
+	if [ `uname` != NetBSD ]; then
+	    tar zxvf $start_dir/pkgsrc.tar.gz
+	else
+	    progress -zf $start_dir/pkgsrc.tar.gz tar xpf -
+	fi
 	if [ 0$snapshot != 0current ]; then
 	    mv pkgsrc `basename $pkgsrc`
 	fi

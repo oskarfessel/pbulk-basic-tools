@@ -1,15 +1,27 @@
 #!/bin/sh
 
-cd /
+cd / || {
+    echo something is seriously wrong with your setup
+    exit 1
+}
+
+mkdir /.tar || {
+    echo something is seriously wrong with your setup
+    exit 1
+}
 
 # better way to create tar file on live systems
-find . -depth | egrep -v '\./proc|\./dev|\./kern|./usr/pkg|\./usr/src|\./usr/xsrc|\./usr/pkgsrc|\./home|\./var/db/pkgin|\./.tar' | cpio -o | gzip -9 > .tar/os-version.tgz
+find . -depth | egrep -v '\./netbsd.10|\./proc|\./dev|\./kern|./usr/pkg|\./usr/src|\./usr/xsrc|\./usr/pkgsrc|\./home|\./var/db/pkgin|\./.tar' | cpio -o | gzip -9 > .tar/os-version.tgz
 
-[ -d /home/bacon.old ] || mv /home/bacon /home/bacon.old 
+[ -d /home/bacon.old ] && {
+    exit 1
+} || {
+    mv /home/bacon /home/bacon.old 
+}
 
 [ -x /usr/pkg/bin/expect -a -f /root/bin/bacon-bootstrap ] && {
 	expect -f /root/bin/bacon-bootstrap
-} else { 
+} || { 
 	pbulk-new-chroot os-version.tgz /home/bacon
 }
 
@@ -19,7 +31,7 @@ find . -depth | egrep -v '\./proc|\./dev|\./kern|./usr/pkg|\./usr/src|\./usr/xsr
 	rm -r /home/bacon.old
 }
 
-	pbulk-start-chroot /home/bacon /usr/pbulk/bin/bootstrap
+echo pbulk-start-chroot /home/bacon /usr/pbulk/bin/bootstrap
 
 echo in the chroot:
 echo Edit pbulk-prefix/pbulk.conf and pbulk-prefix/pbulk.list. Note that pbulk.conf is simply a Bourne shell script that it sourced by pbulk, so later commands override earlier ones.
@@ -28,4 +40,5 @@ echo pkg_rm digest
 echo pkg_rm cwrappers
 echo Run the bulk build:
 echo pbulk-prefix/bin/bulkbuild
-pbulk-start-chroot /home/bacon 
+echo then
+echo pbulk-start-chroot /home/bacon 

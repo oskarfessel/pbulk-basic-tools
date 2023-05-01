@@ -1,37 +1,83 @@
 #! /usr/pkg/bin/expect
-spawn pbulk-new-chroot /home/bacon ./pbulk-setup
+set timeout 600
 
-expect "packages and perform extensive reconfiguration of your system.
+spawn pbulk-new-chroot os-version.tgz /home/bacon
 
-Continue? yes/[no]"
+expect {
+    timeout            exit
+    -exact "Continue? yes/\[no\]"
+}
 send yes\r
-expect "Pkgsrc source directory? [/usr/pkgsrc] "
+expect {
+    timeout            exit
+    -exact "Pkgsrc source directory? \[/usr/pkgsrc\] "
+}
 send \r
-expect "Download and unpack pkgsrc? y/[n] "
+expect {
+    timeout            exit
+    -exact "Download and unpack pkgsrc? y/\[n\] "
+}
 send y\r
-expect "Snapshot? [e.g. 2017Q3 or current] [current] "
+expect {
+    timeout            exit
+    -exact "Snapshot? \[e.g. 2017Q3 or current\] \[current\] "
+}
 send \r
-expect "Update pkgsrc tree? [y]/n "
+expect {
+    timeout            exit
+    -exact "Update pkgsrc tree? \[y\]/n "
+}
 send y\r
-expect "Pkgsrc install prefix? [/usr/pkg] "
+
+expect {
+    timeout            exit
+    -exact "Pkgsrc install prefix? \[/usr/pkg\] "
+}
 send \r
-expect "Pbulk install prefix? [/usr/pbulk] "
+expect {
+    timeout            exit
+    -exact "Pbulk install prefix? \[/usr/pbulk\] "
+}
 send \r
-expect "processes for make to use? [4] "
+expect {
+    timeout            exit
+    -exact "processes for make to use? \[4\] "
+}
 send 2\r
-expect "rsync username (leave blank if you do not want to upload packages)? []"
+expect {
+    timeout            exit
+    -exact "rsync username (leave blank if you do not want to upload packages)? \[\]"
+}
 send root\r
-expect "rsync hostname? [] "
+expect {
+    timeout            exit
+    -exact "rsync hostname? \[\] "
+}
 send hell11.fessel.org\r
-expect "rsync pkg directory? [www/pkgsrc/packages/usr/pkg/NetBSD-10.99.2] "
+expect {
+    timeout            exit
+    -exact "rsync pkg directory? \[www/pkgsrc/packages/usr/pkg/NetBSD-10.99.2\] "
+}
 send "/usr/pkg/share/httpd/htdocs/NetBSD-10.99.2\r"
-expect "rsync report directory? [www/pkgsrc/reports/usr/pkg/NetBSD-10.99.2] "
+expect {
+    timeout            exit
+    -exact "rsync report directory? \[www/pkgsrc/reports/usr/pkg/NetBSD-10.99.2\] "
+}
 send "/usr/pkg/share/httpd/htdocs/reports/usr/pkg/NetBSD-10.99.2\r"
-expect "User to run pbulk builds? [pbulk] "
+expect {
+    timeout            exit
+    -exact "User to run pbulk builds? \[pbulk\] "
+}
 send \r
-expect "Group to run pbulk builds? [pbulk] "
+expect {
+    timeout            exit
+    -exact "Group to run pbulk builds? \[pbulk\] "
+}
 send \r
-exepect "/usr/pbulk/bootstrap"
+exepect {
+    timeout            exit
+    -exact "/usr/pbulk/bootstrap"
+}
 #successful
 #interact
 

@@ -57,7 +57,7 @@ damage your host system.  Aborting...
 EOM
     exit 1
 fi
-rm -rf $dir/dev/* $dir/proc/*
+echo not rm -rf $dir/dev/* $dir/proc/*
 
 # Update OS inside chroot
 if [ `uname` = Linux ] && [ -e $dir/etc/redhat-release ]; then
@@ -76,7 +76,7 @@ damage your host system.  Aborting...
 EOM
 	exit 1
     fi
-    rm -rf $dir/kern/*
+    echo not rm -rf $dir/kern/*
     set -x
     pbulk-start-chroot $dir 'pkgin -y update' || true
     pbulk-start-chroot $dir 'pkgin -y upgrade' || true
