@@ -5,7 +5,7 @@ cd / || {
     exit 1
 }
 
-mkdir /.tar || {
+[ -d .tar ] || mkdir /.tar || {
     echo something is seriously wrong with your setup
     exit 1
 }
@@ -28,7 +28,7 @@ find . -depth | egrep -v '\./netbsd.10|\./proc|\./dev|\./kern|./usr/pkg|\./usr/s
 [ -d /home/bacon.old ] && { 
 	mv /home/bacon.old/usr/pkgsrc/distfiles/* /home/bacon/usr/pkgsrc/distfiles
 	mv /home/bacon.old/limited_list /home/bacon
-	rm -r /home/bacon.old
+	echo please umount directories and  rm -r /home/bacon.old
 }
 
 echo pbulk-start-chroot /home/bacon /usr/pbulk/bin/bootstrap

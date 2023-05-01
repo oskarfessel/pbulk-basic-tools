@@ -56,12 +56,12 @@ expect {
 send hell11.fessel.org\r
 expect {
     timeout            exit
-    -exact "rsync pkg directory? \[www/pkgsrc/packages/usr/pkg/NetBSD-10.99.2\] "
+    -re "rsync pkg directory.*\] "
 }
 send "/usr/pkg/share/httpd/htdocs/NetBSD-10.99.2\r"
 expect {
     timeout            exit
-    -exact "rsync report directory? \[www/pkgsrc/reports/usr/pkg/NetBSD-10.99.2\] "
+    -re "rsync report directory.*\] "
 }
 send "/usr/pkg/share/httpd/htdocs/reports/usr/pkg/NetBSD-10.99.2\r"
 expect {
